@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/ordens")
+@RequestMapping("/beneficiarios")
 public class OrdemPagamentoController {
 
     @Autowired
@@ -26,7 +26,7 @@ public class OrdemPagamentoController {
         return ResponseEntity.ok().body(listPagamento);
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/beneficiarios/{id}")
     public ResponseEntity<OrdemDTO> findById(@PathVariable Long id) {
         OrdemDTO ordemDTO = service.findById(id);
         return ResponseEntity.ok().body(ordemDTO);
@@ -38,12 +38,12 @@ public class OrdemPagamentoController {
         var response = service.insert(ordemPagto);
         return new EnvelopDataJson<>(response);
     }
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/beneficiarios/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/beneficiarios/{id}")
     public ResponseEntity<OrdemPagamento> update(@PathVariable Long id, @Valid @RequestBody OrdemPagamento ordemPagamento) {
         var ordemPagto = service.update(id, ordemPagamento);
         return ResponseEntity.ok().body(ordemPagto);

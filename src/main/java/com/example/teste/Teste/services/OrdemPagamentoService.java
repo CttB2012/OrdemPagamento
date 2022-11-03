@@ -102,6 +102,7 @@ public class OrdemPagamentoService {
 
     public OrdemDTO mapToDTO (OrdemPagamentoDB ordemPagamentoDB) {
         OrdemDTO ordemDTO = new OrdemDTO();
+        ordemDTO.setIdDocumentoBeneficiario(ordemPagamentoDB.getIdDocumentoBeneficiario());
         ordemDTO.setNumeroOrdemPagamento(ordemPagamentoDB.getNumeroOrdemPagamento());
         ordemDTO.setCodigoMoeda(ordemPagamentoDB.getCodigoMoeda());
         ordemDTO.setSimboloMoeda(ordemPagamentoDB.getSimboloMoeda());
