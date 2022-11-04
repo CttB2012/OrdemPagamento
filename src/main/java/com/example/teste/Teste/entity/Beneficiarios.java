@@ -13,15 +13,15 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Beneficiario {
+public class Beneficiarios {
 
-    @JsonProperty("id")
-    private Long id;
+    @JsonProperty("idBeneficiario")
+    private Long idBeneficiario;
 
-    @JsonProperty("nome")
-    private String nome;
+    @JsonProperty("Beneficiario")
+    private String nomeBeneficiario;
 
-    @JsonProperty("documento")
-    private Long documento;
+    @JsonProperty("idDocumento")
+    private Long idDocumentoBeneficiario;
 
 }

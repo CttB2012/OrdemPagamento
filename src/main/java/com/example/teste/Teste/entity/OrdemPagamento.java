@@ -28,10 +28,7 @@ public class OrdemPagamento {
     @JsonProperty("ValorMoeda")
     private BigDecimal valorMoedaEstrangeira;
 
-    @JsonProperty("Beneficiario")
+    @JsonProperty("Beneficiarios")
     private String nomeBeneficiario;
-
-    @JsonProperty("idBeneficiario")
-    private Long idDocumentoBeneficiario;
 
 }

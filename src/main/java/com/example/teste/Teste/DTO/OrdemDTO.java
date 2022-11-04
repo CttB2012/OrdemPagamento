@@ -19,6 +19,9 @@ public class OrdemDTO {
     @JsonProperty("idDocumento")
     private Long idDocumentoBeneficiario;
 
+    @JsonProperty("Beneficiarios")
+    private String nomeBeneficiario;
+
     @JsonProperty("CodigoMoeda")
     private Integer codigoMoeda;
 
@@ -27,9 +30,6 @@ public class OrdemDTO {
 
     @JsonProperty("ValorMoeda")
     private BigDecimal valorMoedaEstrangeira;
-
-    @JsonProperty("Beneficiario")
-    private String nomeBeneficiario;
 
     @JsonProperty("OrdemPrincipalApp")
     private Long numeroOrdemPagamento;

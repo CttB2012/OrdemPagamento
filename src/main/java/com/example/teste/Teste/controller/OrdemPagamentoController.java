@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/beneficiarios")
+@RequestMapping("/ordens")
 public class OrdemPagamentoController {
 
     @Autowired
