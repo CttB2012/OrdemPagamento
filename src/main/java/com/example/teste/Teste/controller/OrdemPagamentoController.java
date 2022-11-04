@@ -26,7 +26,7 @@ public class OrdemPagamentoController {
         return ResponseEntity.ok().body(listPagamento);
     }
 
-    @GetMapping(value = "/beneficiarios/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<OrdemDTO> findById(@PathVariable Long id) {
         OrdemDTO ordemDTO = service.findById(id);
         return ResponseEntity.ok().body(ordemDTO);
@@ -36,14 +36,14 @@ public class OrdemPagamentoController {
     @PostMapping
     public EnvelopDataJson<OrdemDTO> insert(@Valid @RequestBody OrdemPagamento ordemPagto) throws Exception {
         var response = service.insert(ordemPagto);
-        return new EnvelopDataJson<>(response);
+        return new EnvelopDataJson<OrdemDTO>(response);
     }
-    @DeleteMapping(value = "/beneficiarios/{id}")
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
-    @PutMapping(value = "/beneficiarios/{id}")
+    @PutMapping(value = "/{id}")
     public ResponseEntity<OrdemPagamento> update(@PathVariable Long id, @Valid @RequestBody OrdemPagamento ordemPagamento) {
         var ordemPagto = service.update(id, ordemPagamento);
         return ResponseEntity.ok().body(ordemPagto);
