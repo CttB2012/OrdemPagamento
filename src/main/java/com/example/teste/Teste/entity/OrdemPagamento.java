@@ -28,7 +28,7 @@ public class OrdemPagamento {
     @JsonProperty("ValorMoeda")
     private BigDecimal valorMoedaEstrangeira;
 
-    @JsonProperty("Beneficiarios")
+    @JsonProperty("nomeBeneficiario")
     private String nomeBeneficiario;
 
 }

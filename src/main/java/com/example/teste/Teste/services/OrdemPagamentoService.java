@@ -53,8 +53,6 @@ public class OrdemPagamentoService {
 
             return mapToDTO(ordemDB);
 
-        }catch (ExceptionApiOrdem e) {
-            throw e;
         }catch (Exception e){
             throw new ExceptionApiOrdem(HttpStatus.INTERNAL_SERVER_ERROR, "CAD-10", e.getMessage());
         }
@@ -74,8 +72,8 @@ public class OrdemPagamentoService {
             OrdemPagamentoDB ordemDataBase = repository.findById(id).get();
 
             updateData(ordemPagamento, ordemDataBase);
-            repository.save(ordemDataBase);
 
+            repository.save(ordemDataBase);
             return ordemPagamento;
         }catch (NoSuchElementException e) {
             throw new ExceptionApiOrdem(HttpStatus.BAD_REQUEST, "CAD-02", e.getMessage());

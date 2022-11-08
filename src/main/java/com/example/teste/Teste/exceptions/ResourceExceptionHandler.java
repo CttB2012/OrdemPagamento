@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -33,12 +34,12 @@ public class ResourceExceptionHandler extends ResponseEntityExceptionHandler {
 //        StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
 //        return ResponseEntity.status(status).body(err);
 //    }
-//    @ExceptionHandler
-//    public final ResponseEntity<ExceptionResponseModel> handleApiExceptionApiOrdem(ExceptionApiOrdem ex, WebRequest request){
-//        ExceptionResponseModel  error = new ExceptionResponseModel(ex.getCodigoErro(), ex.getMsgCustom(), ex.getMessage());
-//        error.setCampos(ex.getObjetosSaida());
-//        return new ResponseEntity<>(error, ex.getStatus());
-//    }
+    @ExceptionHandler
+    public final ResponseEntity<ExceptionResponseModel> handleApiExceptionApiOrdem(ExceptionApiOrdem ex, WebRequest request){
+        ExceptionResponseModel  error = new ExceptionResponseModel(ex.getCodigoErro(), ex.getMsgCustom(), ex.getMessage());
+        error.setCampos(ex.getObjetosSaida());
+        return new ResponseEntity<>(error, ex.getStatus());
+    }
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         List<ErrorRequest> errors = new ArrayList<>();

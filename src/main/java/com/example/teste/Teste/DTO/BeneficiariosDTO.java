@@ -20,7 +20,7 @@ public class BeneficiariosDTO {
     @JsonProperty("idDocumento")
     private Long idDocumentoBeneficiario;
 
-    @JsonProperty("Beneficiario")
+    @JsonProperty("nomeBeneficiario")
     private String nomeBeneficiario;
 
 

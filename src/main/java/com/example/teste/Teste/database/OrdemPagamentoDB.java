@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 public class OrdemPagamentoDB {
 
     @Id
-    @Column(name = "idDocumentoBeneficiario")
+    @Column(name = "idBeneficiario")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idDocumentoBeneficiario;
 
@@ -30,7 +30,7 @@ public class OrdemPagamentoDB {
     @Column(name = "ValorMoedaEstrangeira")
     private BigDecimal valorMoedaEstrangeira;
 
-    @Column(name = "NomeBeneficiario")
+    @Column(name = "nomeBeneficiario")
     private String nomeBeneficiario;
 
     @Column(name = "OrdemPrincipalApp")

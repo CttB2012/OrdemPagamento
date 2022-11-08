@@ -20,7 +20,7 @@ public class BeneficiariosDB {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idBeneficiario;
 
-    @Column(name = "NomeBeneficiario")
+    @Column(name = "nomeBeneficiario")
     private String nomeBeneficiario;
 
     @Column(name = "idDocumento")

@@ -7,9 +7,12 @@ import com.example.teste.Teste.entity.Beneficiarios;
 import com.example.teste.Teste.exceptions.ExceptionApiOrdem;
 import com.example.teste.Teste.repositories.BeneficiariosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class BeneficiariosService {
@@ -30,8 +33,10 @@ public class BeneficiariosService {
             beneficiariosDTO.setIdBeneficiario(beneficiarios.getIdBeneficiario());
             beneficiariosDTO.setNomeBeneficiario(beneficiarios.getNomeBeneficiario());
             return beneficiariosDTO;
-        }catch (Exception e ) {
-            throw e;
+        }catch ( NoSuchElementException e ) {
+            throw new ExceptionApiOrdem(HttpStatus.BAD_REQUEST, "CAD-04", e.getMessage());
+        }catch (Exception e){
+            throw new ExceptionApiOrdem(HttpStatus.INTERNAL_SERVER_ERROR, "CAD-10", e.getMessage());
         }
     }
     public BeneficiariosDTO insert(Beneficiarios beneficiarios) throws Exception {
@@ -62,4 +67,31 @@ public class BeneficiariosService {
         beneficiariosDTO.setNomeBeneficiario(beneficiariosDB.getNomeBeneficiario());
         return beneficiariosDTO;
     }
+    public void delete(Long id) {
+        try {
+            repository.deleteById(id);
+        }catch (EmptyResultDataAccessException e) {
+            throw e;
+        }catch (Exception e) {
+            throw e;
+        }
+    }
+    public Beneficiarios update(Long id, Beneficiarios beneficiarios) {
+        try {
+            BeneficiariosDB beneficiariosDB = repository.findById(id).get();
+            updateData(beneficiarios, beneficiariosDB);
+            repository.save(beneficiariosDB);
+            return beneficiarios;
+        }catch (NoSuchElementException e) {
+            throw e;
+        }catch (Exception e){
+            throw e;
+        }
+    }
+    private void updateData(Beneficiarios beneficiarios, BeneficiariosDB beneficiariosDB) {
+        beneficiariosDB.setIdBeneficiario(beneficiarios.getIdBeneficiario());
+        beneficiariosDB.setIdDocumentoBeneficiario(beneficiarios.getIdDocumentoBeneficiario());
+        beneficiariosDB.setNomeBeneficiario(beneficiarios.getNomeBeneficiario());
+    }
+
 }

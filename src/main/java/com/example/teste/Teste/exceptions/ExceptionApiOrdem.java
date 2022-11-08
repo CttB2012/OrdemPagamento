@@ -12,7 +12,6 @@ import java.util.List;
 @Getter
 @Setter
 public class ExceptionApiOrdem extends ResponseStatusException  {
-
     private static final long serialVersionUID = 1L;
 
     private String codigoErro;

@@ -16,10 +16,10 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class OrdemDTO {
 
-    @JsonProperty("idDocumento")
+    @JsonProperty("idBeneficiario")
     private Long idDocumentoBeneficiario;
 
-    @JsonProperty("Beneficiarios")
+    @JsonProperty("nomeBeneficiario")
     private String nomeBeneficiario;
 
     @JsonProperty("CodigoMoeda")

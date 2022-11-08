@@ -3,6 +3,7 @@ package com.example.teste.Teste.controller;
 import com.example.teste.Teste.DTO.BeneficiariosDTO;
 import com.example.teste.Teste.database.BeneficiariosDB;
 import com.example.teste.Teste.entity.Beneficiarios;
+import com.example.teste.Teste.entity.EnvelopDataJson;
 import com.example.teste.Teste.services.BeneficiariosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,11 @@ public class BeneficiariosController {
         BeneficiariosDTO beneficiariosDTO = service.findById(id);
         return ResponseEntity.ok().body(beneficiariosDTO);
     }
+    @PostMapping
+    public EnvelopDataJson<BeneficiariosDTO> insert(@Valid @RequestBody Beneficiarios beneficiarios) throws Exception{
+        var response = service.insert(beneficiarios);
+        return new EnvelopDataJson<BeneficiariosDTO>(response);
+    }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
@@ -36,7 +42,7 @@ public class BeneficiariosController {
     }
     @PutMapping(value = "/{id}")
     public ResponseEntity<Beneficiarios> update(@PathVariable Long id, @Valid @RequestBody Beneficiarios beneficiarios) {
-        var beneficiariosService = service.update(id);
+        var beneficiariosService = service.update(id, beneficiarios);
         return ResponseEntity.ok().body(beneficiariosService);
     }
 }
