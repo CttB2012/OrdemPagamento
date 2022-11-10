@@ -24,7 +24,7 @@ public class BeneficiariosDB {
     private String nomeBeneficiario;
 
     @Column(name = "idDocumento")
-    private Long idDocumentoBeneficiario;
+    private String idDocumentoBeneficiario;
 
 
 

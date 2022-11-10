@@ -6,10 +6,12 @@ import com.example.teste.Teste.database.BeneficiariosDB;
 import com.example.teste.Teste.entity.Beneficiarios;
 import com.example.teste.Teste.exceptions.ExceptionApiOrdem;
 import com.example.teste.Teste.repositories.BeneficiariosRepository;
+import com.example.teste.Teste.services.utils.NumeroDocumentoUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -42,17 +44,18 @@ public class BeneficiariosService {
     public BeneficiariosDTO insert(Beneficiarios beneficiarios) throws Exception {
 
         try {
+
+            NumeroDocumentoUtils.validarCPF(beneficiarios.getIdDocumentoBeneficiario());
             var beneficiarios1 = mapToDB(beneficiarios);
-            var benficiariosDB = repository.save(beneficiarios1);
+            var beneficiariosDB = repository.save(beneficiarios1);
 
-            return mapToDTO(benficiariosDB);
+            return mapToDTO(beneficiariosDB);
         }catch (ExceptionApiOrdem e) {
-            throw e;
-        }catch (Exception e) {
-            throw e;
+            throw new ExceptionApiOrdem(HttpStatus.INTERNAL_SERVER_ERROR, "CAD-10", e.getMessage());
         }
-
     }
+
+
     public BeneficiariosDB mapToDB(Beneficiarios beneficiarios) {
         BeneficiariosDB beneficiariosDB = new BeneficiariosDB();
         beneficiariosDB.setIdBeneficiario(beneficiarios.getIdBeneficiario());
@@ -67,6 +70,7 @@ public class BeneficiariosService {
         beneficiariosDTO.setNomeBeneficiario(beneficiariosDB.getNomeBeneficiario());
         return beneficiariosDTO;
     }
+
     public void delete(Long id) {
         try {
             repository.deleteById(id);

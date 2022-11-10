@@ -18,7 +18,7 @@ public class BeneficiariosDTO {
     private Long idBeneficiario;
 
     @JsonProperty("idDocumento")
-    private Long idDocumentoBeneficiario;
+    private String idDocumentoBeneficiario;
 
     @JsonProperty("nomeBeneficiario")
     private String nomeBeneficiario;
