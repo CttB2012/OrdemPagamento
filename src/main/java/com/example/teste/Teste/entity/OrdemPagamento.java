@@ -27,18 +27,16 @@ public class OrdemPagamento {
     @JsonProperty("CodigoMoeda")
     private Integer codigoMoeda;
 
-    @NotNull(message = "O símbolo da moeda deve ser informado")
+
     @NotBlank(message = "O símbolo da moeda deve ser informado")
-    @NotEmpty(message = "O símbolo não pode ser vazio")
     @JsonProperty("SimboloMoeda")
     private String simboloMoeda;
 
     @JsonProperty("ValorMoeda")
     private BigDecimal valorMoedaEstrangeira;
 
-    @NotNull(message= "Nome é obrigatorio" )
+
     @NotBlank(message = "O nome deve ser informado")
-    @NotEmpty(message = "O nome não pode ser vazio")
     @Pattern(regexp = "[a-zA-Z\\s]+", message = "O nome não pode ter caracteres especiais")
     @JsonProperty("nomeBeneficiario")
     private String nomeBeneficiario;

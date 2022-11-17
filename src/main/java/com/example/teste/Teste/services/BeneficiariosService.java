@@ -45,16 +45,21 @@ public class BeneficiariosService {
 
         try {
 
-            NumeroDocumentoUtils.validarCPF(beneficiarios.getIdDocumentoBeneficiario());
+            var cpfValido = NumeroDocumentoUtils.validarCPF(beneficiarios.getIdDocumentoBeneficiario());
+            if (cpfValido == false) {
+                throw new ExceptionApiOrdem(HttpStatus.BAD_REQUEST, "CAD-05" );
+            }
+
             var beneficiarios1 = mapToDB(beneficiarios);
             var beneficiariosDB = repository.save(beneficiarios1);
 
             return mapToDTO(beneficiariosDB);
-        }catch (ExceptionApiOrdem e) {
+        } catch (ExceptionApiOrdem e) {
+            throw  e;
+        } catch (Exception e) {
             throw new ExceptionApiOrdem(HttpStatus.INTERNAL_SERVER_ERROR, "CAD-10", e.getMessage());
         }
     }
-
 
     public BeneficiariosDB mapToDB(Beneficiarios beneficiarios) {
         BeneficiariosDB beneficiariosDB = new BeneficiariosDB();

@@ -1,8 +1,10 @@
 package com.example.teste.Teste.services.utils;
 
 
+import com.example.teste.Teste.exceptions.ExceptionApiOrdem;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import org.springframework.http.HttpStatus;
 
 import java.util.InputMismatchException;
 
@@ -18,7 +20,7 @@ public class NumeroDocumentoUtils {
                 CPF.equals("66666666666") || CPF.equals("77777777777") ||
                 CPF.equals("88888888888") || CPF.equals("99999999999") ||
                 (CPF.length() != 11))
-            return(false);
+            return false;
 
         char dig10, dig11;
         int sm, i, r, num, peso;
@@ -55,10 +57,10 @@ public class NumeroDocumentoUtils {
 
 
             if ((dig10 == CPF.charAt(9)) && (dig11 == CPF.charAt(10)))
-                return(true);
-            else return(false);
-        } catch (InputMismatchException erro) {
-            return(false);
+                return true;
+            else return false;
+        } catch (InputMismatchException e) {
+            throw new ExceptionApiOrdem(HttpStatus.INTERNAL_SERVER_ERROR, "CAD-10", e.getMessage());
         }
     }
 
