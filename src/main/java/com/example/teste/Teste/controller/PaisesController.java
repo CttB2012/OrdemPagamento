@@ -1,6 +1,5 @@
 package com.example.teste.Teste.controller;
 
-import com.example.teste.Teste.DTO.PaisesDTO;
 import com.example.teste.Teste.database.PaisesDB;
 import com.example.teste.Teste.entity.EnvelopDataJson;
 import com.example.teste.Teste.entity.Paises;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -29,26 +27,26 @@ public class PaisesController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<PaisesDTO> findByName(@PathVariable String name) {
-        PaisesDTO paisesDTO = paisesService.findByName(name);
+    public ResponseEntity<com.example.teste.Teste.DTO.PaisesDTO> findByName(@PathVariable String name) {
+        com.example.teste.Teste.DTO.PaisesDTO paisesDTO = paisesService.findByName(name);
         return  ResponseEntity.ok().body(paisesDTO);
     }
 
     @GetMapping(value = "/nome")
-    public ResponseEntity<PaisesDTO> findByID(@PathVariable Integer id) {
-        PaisesDTO paisesDTO = paisesService.findById(id);
+    public ResponseEntity<com.example.teste.Teste.DTO.PaisesDTO> findByID(@PathVariable Integer id) {
+        com.example.teste.Teste.DTO.PaisesDTO paisesDTO = paisesService.findById(id);
         return ResponseEntity.ok().body(paisesDTO);
     }
     @GetMapping(value = "/{codigo}")
-    public ResponseEntity<PaisesDTO> findByCodigo(@PathVariable Integer codigo) {
-        PaisesDTO paisesDTO = paisesService.findByCodigo(codigo);
+    public ResponseEntity<com.example.teste.Teste.DTO.PaisesDTO> findByCodigo(@PathVariable Integer codigo) {
+        com.example.teste.Teste.DTO.PaisesDTO paisesDTO = paisesService.findByCodigo(codigo);
         return  ResponseEntity.ok().body(paisesDTO);
     }
 
     @PostMapping
-    public EnvelopDataJson<PaisesDTO> insert(@Valid @RequestBody Paises paises) throws Exception {
+    public EnvelopDataJson<com.example.teste.Teste.DTO.PaisesDTO> insert(@Valid @RequestBody Paises paises) throws Exception {
         var responseFromDTO = paisesService.insert(paises);
-        return new EnvelopDataJson<PaisesDTO>(responseFromDTO);
+        return new EnvelopDataJson<com.example.teste.Teste.DTO.PaisesDTO>(responseFromDTO);
     }
 
     @DeleteMapping(value = "/{id}")

@@ -68,7 +68,7 @@ public class BeneficiariosService {
         beneficiariosDB.setIdDocumentoBeneficiario(beneficiarios.getIdDocumentoBeneficiario());
         return beneficiariosDB;
     }
-    public BeneficiariosDTO mapToDTO (BeneficiariosDB beneficiariosDB) {
+    public BeneficiariosDTO mapToDTO(BeneficiariosDB beneficiariosDB) {
         BeneficiariosDTO beneficiariosDTO = new BeneficiariosDTO();
         beneficiariosDTO.setIdBeneficiario(beneficiariosDB.getIdBeneficiario());
         beneficiariosDTO.setIdDocumentoBeneficiario(beneficiariosDB.getIdDocumentoBeneficiario());
