@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.persistence.criteria.CriteriaBuilder;
+
 import java.util.List;
 
 @RestController
@@ -89,6 +89,19 @@ public class PaisesService {
     public void delete(Integer id) {
 
         paisesRepository.deleteById(id);
+    }
+
+    public Paises update(Integer id, Paises paises) {
+
+        PaisesDB paisesDB = paisesRepository.findById(id).get();
+        updateData(paises, paisesDB);
+        paisesRepository.save(paisesDB);
+        return paises;
+    }
+    private void updateData(Paises paises, PaisesDB paisesDB) {
+        paisesDB.setIdPais(paises.getIdPais());
+        paisesDB.setNomePais(paises.getNomePais());
+        paisesDB.setCodigoPais(paises.getCodigoPais());
     }
 }
 
