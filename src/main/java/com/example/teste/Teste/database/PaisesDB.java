@@ -1,26 +1,30 @@
 package com.example.teste.Teste.database;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.*;
 
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class PaisesDB {
 
 
-    @JsonProperty("idPais")
+    @Id
+    @Column(name = "idPais")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idPais;
 
-    @JsonProperty("nomePais")
+    @Column(name = "nomePais")
     private String nomePais;
 
-    @JsonProperty("codigoPais")
+    @Column(name = "codigoPais")
     private Integer codigoPais;
 
 }

@@ -32,7 +32,6 @@ public class OrdemPagamentoController {
         return ResponseEntity.ok().body(ordemDTO);
     }
 
-    //Verificar
     @PostMapping
     public EnvelopDataJson<OrdemDTO> insert(@Valid @RequestBody OrdemPagamento ordemPagto) throws Exception {
         var response = service.insert(ordemPagto);

@@ -1,5 +1,6 @@
 package com.example.teste.Teste.controller;
 
+import com.example.teste.Teste.DTO.PaisesDTO;
 import com.example.teste.Teste.database.PaisesDB;
 import com.example.teste.Teste.entity.EnvelopDataJson;
 import com.example.teste.Teste.entity.Paises;
@@ -13,7 +14,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping
+@RequestMapping("/paises")
 public class PaisesController {
 
 
@@ -27,26 +28,26 @@ public class PaisesController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<com.example.teste.Teste.DTO.PaisesDTO> findByName(@PathVariable String name) {
-        com.example.teste.Teste.DTO.PaisesDTO paisesDTO = paisesService.findByName(name);
+    public ResponseEntity<PaisesDTO> findByName(@PathVariable String name) {
+        PaisesDTO paisesDTO = paisesService.findByName(name);
         return  ResponseEntity.ok().body(paisesDTO);
     }
 
-    @GetMapping(value = "/nome")
-    public ResponseEntity<com.example.teste.Teste.DTO.PaisesDTO> findByID(@PathVariable Integer id) {
-        com.example.teste.Teste.DTO.PaisesDTO paisesDTO = paisesService.findById(id);
+    @GetMapping(value = "/{nome}")
+    public ResponseEntity<PaisesDTO> findByID(@PathVariable Integer id) {
+        PaisesDTO paisesDTO = paisesService.findById(id);
         return ResponseEntity.ok().body(paisesDTO);
     }
     @GetMapping(value = "/{codigo}")
-    public ResponseEntity<com.example.teste.Teste.DTO.PaisesDTO> findByCodigo(@PathVariable Integer codigo) {
-        com.example.teste.Teste.DTO.PaisesDTO paisesDTO = paisesService.findByCodigo(codigo);
+    public ResponseEntity<PaisesDTO> findByCodigo(@PathVariable Integer codigo) {
+        PaisesDTO paisesDTO = paisesService.findByCodigo(codigo);
         return  ResponseEntity.ok().body(paisesDTO);
     }
 
     @PostMapping
-    public EnvelopDataJson<com.example.teste.Teste.DTO.PaisesDTO> insert(@Valid @RequestBody Paises paises) throws Exception {
+    public EnvelopDataJson<PaisesDTO> insert(@Valid @RequestBody Paises paises) throws Exception {
         var responseFromDTO = paisesService.insert(paises);
-        return new EnvelopDataJson<com.example.teste.Teste.DTO.PaisesDTO>(responseFromDTO);
+        return new EnvelopDataJson<PaisesDTO>(responseFromDTO);
     }
 
     @DeleteMapping(value = "/{id}")
@@ -55,7 +56,7 @@ public class PaisesController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping(value = "/{id")
+    @PutMapping(value = "/{id}")
     public ResponseEntity<Paises> update(@PathVariable Integer id, @Valid @RequestBody Paises paises) {
         var service = paisesService.update(id, paises);
         return ResponseEntity.ok().body(service);

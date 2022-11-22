@@ -44,7 +44,6 @@ public class BeneficiariosService {
     public BeneficiariosDTO insert(Beneficiarios beneficiarios) throws Exception {
 
         try {
-
             var cpfValido = NumeroDocumentoUtils.validarCPF(beneficiarios.getIdDocumentoBeneficiario());
             if (cpfValido == false) {
                 throw new ExceptionApiOrdem(HttpStatus.BAD_REQUEST, "CAD-05" );
