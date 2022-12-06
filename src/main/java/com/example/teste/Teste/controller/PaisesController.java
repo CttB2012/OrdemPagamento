@@ -5,6 +5,7 @@ import com.example.teste.Teste.database.PaisesDB;
 import com.example.teste.Teste.entity.EnvelopDataJson;
 import com.example.teste.Teste.entity.Paises;
 import com.example.teste.Teste.services.PaisesService;
+import com.example.teste.Teste.services.interfaces.InterfacePaisesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,7 @@ import java.util.List;
 public class PaisesController {
 
 
+
     @Autowired
     private PaisesService paisesService;
 
@@ -27,18 +29,21 @@ public class PaisesController {
         return ResponseEntity.ok().body(listPaises);
     }
 
-    @GetMapping(value = "/{id}")
+
+    @RequestMapping(value = "/name/{name}", method = RequestMethod.GET)
     public ResponseEntity<PaisesDTO> findByName(@PathVariable String name) {
         PaisesDTO paisesDTO = paisesService.findByName(name);
         return  ResponseEntity.ok().body(paisesDTO);
     }
 
-    @GetMapping(value = "/{nome}")
+
+
+    @GetMapping(value = "/{id}")
     public ResponseEntity<PaisesDTO> findByID(@PathVariable Integer id) {
         PaisesDTO paisesDTO = paisesService.findById(id);
         return ResponseEntity.ok().body(paisesDTO);
     }
-    @GetMapping(value = "/{codigo}")
+    @RequestMapping(value = "/codigo/{codigo}", method = RequestMethod.GET)
     public ResponseEntity<PaisesDTO> findByCodigo(@PathVariable Integer codigo) {
         PaisesDTO paisesDTO = paisesService.findByCodigo(codigo);
         return  ResponseEntity.ok().body(paisesDTO);

@@ -8,9 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @Getter
 @Setter
@@ -24,13 +22,12 @@ public class Paises {
     private Integer idPais;
 
     @NotBlank(message = "O nome do pais deve ser informado")
-    @Pattern(regexp = "[a-zA-Z\\s]+", message = "O nome não pode ter caracteres especiais")
+    @Pattern(regexp = "[A-Za-z ÇçÁáÉéÍíÓóÚúÃãÂâÊêÎîÔôÛû\\s]+", message = "O nome do país não pode conter números ou caracteres especiais")
     @JsonProperty("nomePais")
     private String nomePais;
 
-    @NotBlank(message = "O código do Pais deve ser informado")
-    @Size(max = 4, min = 6, message = "Quantidade de dígitos incorreta")
-    @Pattern(regexp = "[0-9 \\s]+", message = "CPF inválido")
+    @Min(value = 100)
+    @Max(value = 9999)
     @JsonProperty("codigoPais")
     private Integer codigoPais;
 

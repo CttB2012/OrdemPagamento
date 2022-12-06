@@ -6,6 +6,7 @@ import com.example.teste.Teste.database.BeneficiariosDB;
 import com.example.teste.Teste.entity.Beneficiarios;
 import com.example.teste.Teste.exceptions.ExceptionApiOrdem;
 import com.example.teste.Teste.repositories.BeneficiariosRepository;
+import com.example.teste.Teste.services.interfaces.InterfaceBeneficiariosService;
 import com.example.teste.Teste.services.utils.NumeroDocumentoUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -17,15 +18,17 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
-public class BeneficiariosService {
+public class BeneficiariosService implements InterfaceBeneficiariosService {
 
     @Autowired
     private BeneficiariosRepository repository;
 
+    @Override
     public List<BeneficiariosDB> listAll() {
         List<BeneficiariosDB> listaBeneficiarios = repository.findAll();
         return listaBeneficiarios;
     }
+    @Override
     public BeneficiariosDTO findById(Long id) {
         try {
             var beneficiarios = repository.findById(id).get();
@@ -41,6 +44,7 @@ public class BeneficiariosService {
             throw new ExceptionApiOrdem(HttpStatus.INTERNAL_SERVER_ERROR, "CAD-10", e.getMessage());
         }
     }
+    @Override
     public BeneficiariosDTO insert(Beneficiarios beneficiarios) throws Exception {
 
         try {
@@ -75,15 +79,17 @@ public class BeneficiariosService {
         return beneficiariosDTO;
     }
 
+    @Override
     public void delete(Long id) {
         try {
             repository.deleteById(id);
-        }catch (EmptyResultDataAccessException e) {
-            throw e;
-        }catch (Exception e) {
-            throw e;
+        }catch (NoSuchElementException e) {
+            throw new ExceptionApiOrdem(HttpStatus.BAD_REQUEST, "CAD-04", e.getMessage());
+        }catch (Exception e){
+            throw new ExceptionApiOrdem(HttpStatus.INTERNAL_SERVER_ERROR, "CAD-10", e.getMessage());
         }
     }
+    @Override
     public Beneficiarios update(Long id, Beneficiarios beneficiarios) {
         try {
             BeneficiariosDB beneficiariosDB = repository.findById(id).get();
@@ -91,9 +97,9 @@ public class BeneficiariosService {
             repository.save(beneficiariosDB);
             return beneficiarios;
         }catch (NoSuchElementException e) {
-            throw e;
+            throw new ExceptionApiOrdem(HttpStatus.BAD_REQUEST, "CAD-04", e.getMessage());
         }catch (Exception e){
-            throw e;
+            throw new ExceptionApiOrdem(HttpStatus.INTERNAL_SERVER_ERROR, "CAD-10", e.getMessage());
         }
     }
     private void updateData(Beneficiarios beneficiarios, BeneficiariosDB beneficiariosDB) {
