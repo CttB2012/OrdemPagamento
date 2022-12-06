@@ -7,6 +7,7 @@ import com.example.teste.Teste.entity.OrdemPagamento;
 import com.example.teste.Teste.exceptions.ExceptionApiOrdem;
 import com.example.teste.Teste.repositories.OrdemPagamentoRepository;
 
+import com.example.teste.Teste.services.interfaces.InterfaceOrdemPagamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -18,17 +19,19 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
-public class OrdemPagamentoService {
+public class OrdemPagamentoService implements InterfaceOrdemPagamentoService {
 
     @Autowired
     private OrdemPagamentoRepository repository;
 
 
+    @Override
     public List<OrdemPagamentoDB> listAll() {
         List<OrdemPagamentoDB> listaPagamentos = repository.findAll();
         return listaPagamentos;
     }
 
+    @Override
     public OrdemDTO findById(Long id) {
         try {
             var ordem = repository.findById(id).get();
@@ -45,6 +48,7 @@ public class OrdemPagamentoService {
         }
     }
 
+    @Override
     public OrdemDTO insert(OrdemPagamento ordemPagamento) throws  Exception {
 
         try {
@@ -57,6 +61,7 @@ public class OrdemPagamentoService {
             throw new ExceptionApiOrdem(HttpStatus.INTERNAL_SERVER_ERROR, "CAD-10", e.getMessage());
         }
     }
+    @Override
     public void delete(Long id) {
         try {
             repository.deleteById(id);
@@ -67,6 +72,7 @@ public class OrdemPagamentoService {
         }
 
     }
+    @Override
     public OrdemPagamento update(Long id, OrdemPagamento ordemPagamento) {
         try {
             OrdemPagamentoDB ordemDataBase = repository.findById(id).get();
