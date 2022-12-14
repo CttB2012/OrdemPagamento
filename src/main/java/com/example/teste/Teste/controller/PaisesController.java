@@ -4,7 +4,6 @@ import com.example.teste.Teste.DTO.PaisesDTO;
 import com.example.teste.Teste.database.PaisesDB;
 import com.example.teste.Teste.entity.EnvelopDataJson;
 import com.example.teste.Teste.entity.Paises;
-import com.example.teste.Teste.services.PaisesService;
 import com.example.teste.Teste.services.interfaces.InterfacePaisesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +20,12 @@ public class PaisesController {
 
 
     @Autowired
-    private PaisesService paisesService;
+    private InterfacePaisesService paisesService;
+
+
+//    public PaisesController(InterfacePaisesService paisesServiceInterface) {
+//        this.paisesService = paisesServiceInterface;
+//    }
 
     @GetMapping
     public ResponseEntity<List<PaisesDB>> listAll() {

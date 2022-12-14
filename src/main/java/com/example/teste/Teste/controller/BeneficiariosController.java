@@ -4,8 +4,7 @@ import com.example.teste.Teste.DTO.BeneficiariosDTO;
 import com.example.teste.Teste.database.BeneficiariosDB;
 import com.example.teste.Teste.entity.Beneficiarios;
 import com.example.teste.Teste.entity.EnvelopDataJson;
-import com.example.teste.Teste.services.BeneficiariosService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.teste.Teste.services.interfaces.InterfaceBeneficiariosService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +15,13 @@ import java.util.List;
 @RequestMapping("/beneficiarios")
 public class BeneficiariosController {
 
-    @Autowired
-    private BeneficiariosService service;
+
+
+    private InterfaceBeneficiariosService service;
+
+    public BeneficiariosController(InterfaceBeneficiariosService beneficiariosInterface) {
+        this.service = beneficiariosInterface;
+    }
 
     @GetMapping
     public ResponseEntity<List<BeneficiariosDB>> listAll() {

@@ -5,7 +5,7 @@ import com.example.teste.Teste.database.OrdemPagamentoDB;
 import com.example.teste.Teste.entity.EnvelopDataJson;
 import com.example.teste.Teste.entity.OrdemPagamento;
 import com.example.teste.Teste.services.OrdemPagamentoService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.teste.Teste.services.interfaces.InterfaceOrdemPagamentoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +17,13 @@ import java.util.List;
 @RequestMapping("/ordens")
 public class OrdemPagamentoController {
 
-    @Autowired
-    private OrdemPagamentoService service;
+
+    private InterfaceOrdemPagamentoService service;
+
+
+    public OrdemPagamentoController(OrdemPagamentoService ordemPagamentoInterface) {
+        this.service = ordemPagamentoInterface;
+    }
 
     @GetMapping
     public ResponseEntity<List<OrdemPagamentoDB>> listAll () {
